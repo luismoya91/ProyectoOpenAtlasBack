@@ -28,8 +28,6 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyAuthApp')->plainTextToken;
-        $success['name'] =  $user->name;
         $success['message'] = 'User created successfully.';
    
         return response($success,200);
@@ -42,6 +40,7 @@ class AuthController extends Controller
                 'password' => $request->password
             ])) { 
             $authUser = Auth::user(); 
+            $success['user_id'] =  $authUser->id;
             $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken; 
             $success['name'] =  $authUser->name;
             $success['message'] = 'User signed in';
@@ -50,5 +49,11 @@ class AuthController extends Controller
         } else { 
             return response(['error' => 'Invalid credentials'], 401);
         } 
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response(['message' => 'User logged out successfully.'], 200);
     }
 }

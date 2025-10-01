@@ -106,10 +106,9 @@ class ProjectController extends Controller
 
     public function listByUser(User $user)
     {
-        $projects = Project::where('active', 1)->with(['users' => function($query) use ($user){
+        $projects = Project::where('active', 1)->whereHas('users' , function($query) use ($user){
             $query->where('user_id', $user->id);
-        } , 'tasks.status', 'fee', 'status'])->get();
-        
+        })->with('tasks.status', 'fee', 'status')->get();        
         return response($projects, 200);
     }
 }

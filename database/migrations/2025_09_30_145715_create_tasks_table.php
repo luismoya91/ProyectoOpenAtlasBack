@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->bigInteger('status_id');
+            $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')
               ->references('id')
               ->on('statuses')->onDelete('cascade');

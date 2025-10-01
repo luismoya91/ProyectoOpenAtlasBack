@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('projects_tasks', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('project_id');
+            $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')
               ->references('id')
               ->on('projects')->onDelete('cascade');
-            $table->bigInteger('task_id');
+            $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')
               ->references('id')
               ->on('tasks')->onDelete('cascade');

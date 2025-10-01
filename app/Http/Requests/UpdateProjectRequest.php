@@ -24,15 +24,15 @@ class UpdateProjectRequest extends FormRequest
          return [
             'name' => 'sometimes|string',
             'description' => 'sometimes|string',
-            'status_id' => 'sometimes|exists:statuses,id,type,"Project"',
+            'status_id' => 'sometimes|exists:statuses,id,type,"Project",active,1',
             'start_date' => 'sometimes|date',
             'end_date' => 'sometimes|date',
             'active' => 'sometimes',
             'users' => 'sometimes|array',
             'users.*' => 'sometimes|exists:users,id',
-            'fee_id' => 'sometimes|integer|exists:fees,id',
+            'fee_id' => 'sometimes|integer|exists:fees,id,active,1',
             'tasks' => 'required|array',
-            'tasks.*' => 'required|exists:tasks,id'
+            'tasks.*' => 'required|exists:tasks,id,active,1'
         ];
     }
 }

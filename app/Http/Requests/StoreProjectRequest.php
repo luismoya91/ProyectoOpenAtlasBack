@@ -24,13 +24,13 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
-            'status_id' => 'required|exists:statuses,id,type,"Project"',
+            'status_id' => 'required|exists:statuses,id,type,"Project",active,1',
             'start_date' => 'required|date',
             'end_date' => 'sometimes|date',
             'active' => 'sometimes',
             'users' => 'required|array',
             'users.*' => 'required|exists:users,id',
-            'fee_id' => 'required|integer|exists:fees,id',
+            'fee_id' => 'required|integer|exists:fees,id,active,1',
             'tasks' => 'required|array',
             'tasks.*' => 'required|exists:tasks,id'
         ];

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->bigInteger('fee_id');
+            $table->unsignedBigInteger('fee_id');
             $table->foreign('fee_id')
               ->references('id')
               ->on('fees')->onDelete('cascade');
-            $table->bigInteger('status_id');
+            $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')
               ->references('id')
               ->on('statuses')->onDelete('cascade');
